@@ -1,9 +1,6 @@
-from ast import arg
 import os
 import struct
 import sys
-from turtle import color
-import colorama
 
 class TMDFile:
     def __init__(self) -> None:
@@ -44,15 +41,13 @@ class TMDFile:
         
         return ret
 
-colorama.init()
-
 if len(sys.argv) <= 1:
-    print(colorama.Fore.CYAN + "python tmd.py <filename>")
+    print("python tmd.py <filename>")
 else:
     test = TMDFile.fromFile(sys.argv[1])
     outpath = sys.argv[1][:-3] + "txt"
 
-    print(colorama.Fore.CYAN + f"Writing {len(test.Strings)} entries to {outpath}... ", end=' ')
+    print(f"Writing {len(test.Strings)} entries to {outpath}... ", end=' ')
     if test is not None:
         test.toTxt(outpath)
-    print(colorama.Fore.GREEN + f"Done!")
+    print(f"Done!")
