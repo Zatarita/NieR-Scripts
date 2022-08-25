@@ -3,7 +3,6 @@ from struct import pack, unpack, calcsize
 from dataclasses import dataclass
 import os
 import sys
-from colorama import init, Fore
 from shared import Serializable
 
 @dataclass
@@ -38,17 +37,17 @@ class DATFile:
             os.makedirs(path)
 
         if self.Header.Count == 0:
-            print(Fore.YELLOW + "\t[IGNORING EMPTY DAT FILE]")
+            print("\t[IGNORING EMPTY DAT FILE]")
             return
 
         for name in self.Filenames:
             try:
                 if self.extract(name, path, overwrite):
-                    print("\t" + Fore.GREEN + name)
+                    print("\t" + name)
                 else:
-                    print("\t" + Fore.YELLOW + name + "  \t[ALREADY EXISTS - IGNORING]")
+                    print("\t" + name + "  \t[ALREADY EXISTS - IGNORING]")
             except(...):
-                print("\t" + Fore.RED + name)
+                print("\t" + name)
 
     def extract(self, name : str, path : str, overwrite = False):
         if os.path.exists(path):
@@ -100,17 +99,15 @@ class DATFile:
 
         return ret
 
-init()
-
 
 if len(sys.argv) <= 1:
-    print(Fore.CYAN + "python dat.py <filename>")
+    print("python dat.py <filename>")
 else:
     if os.path.getsize(sys.argv[1]) == 0:
-        print(Fore.YELLOW + "Ignoring empty file")
+        print("Ignoring empty file")
         exit()
     test = DATFile.fromFile(sys.argv[1])
-    print(Fore.CYAN + f"Writing {sys.argv[1]}... ")
+    print(f"Writing {sys.argv[1]}... ")
     test.extractAll(sys.argv[1][:-3])
     print("")
 
