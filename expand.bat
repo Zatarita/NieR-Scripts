@@ -1,7 +1,7 @@
 @echo off
 
 echo Extracting DDT Files...
-:: Run this twice as some dats hold other dtts
+:: Run this twice as some dtts hold other dtts
 for /r %%f in (*.dtt) do python dat.py "%%f"
 for /r %%f in (*.dtt) do python dat.py "%%f"
 
